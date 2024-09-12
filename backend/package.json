@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-db": "docker-compose up -d",
+    "start": "node src/server",
+    "dev": "node --watch src/server",
+    "start:migrate:prod": "npx prisma db push && npm start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.20.0",
+    "express-async-errors": "^3.1.1",
+    "moment": "^2.30.1",
+    "mongoose": "^8.6.1",
+    "zod": "^3.23.8"
+  }
+}
