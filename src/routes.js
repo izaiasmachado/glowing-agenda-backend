@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const AppointmentMiddleware = require("./middlewares/AppointmentMiddleware");
 const ScheduleAppointmentMiddleware = require("./middlewares/ScheduleAppointmentMiddleware");
 const ScheduleAppointmentController = require("./controllers/ScheduleAppointmentController");
 const AppointmentController = require("./controllers/AppointmentController");
@@ -15,6 +16,10 @@ router.post(
   ScheduleAppointmentMiddleware.validateAppointmentSchedule,
   ScheduleAppointmentController.create
 );
-router.get("/appointments", AppointmentController.index);
+router.get(
+  "/appointments",
+  AppointmentMiddleware.isSearchValid,
+  AppointmentController.index
+);
 
 module.exports = router;
