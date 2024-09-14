@@ -1,4 +1,5 @@
 const zod = require("../lib/zod");
+const { cpf } = require("cpf-cnpj-validator");
 
 const scheduleAppointmentSchema = zod.object({
   time: zod
@@ -9,7 +10,9 @@ const scheduleAppointmentSchema = zod.object({
     .string()
     .length(10)
     .regex(/^\d{4}-\d{2}-\d{2}$/),
-  cpf: zod.string().length(11).regex(/^\d+$/),
+  cpf: zod.string().refine((value) => cpf.isValid(value), {
+    message: "CPF inválido",
+  }),
   name: zod.string().min(1).max(255),
   email: zod.string().email().max(255),
 });
