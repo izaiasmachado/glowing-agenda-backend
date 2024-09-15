@@ -22,7 +22,42 @@ async function sendConfirmationMail(appointment) {
     text: buildConfirmationEmailText(appointment),
   };
 
-  return nodemailer.sendMail(options);
+  return new Promise((resolve, reject) => {
+    nodemailer.sendMail(options, (error, info) => {
+      if (error) return reject(error);
+      return resolve(info);
+    });
+  });
 }
 
-module.exports = { sendConfirmationMail };
+async function buildNotificationEmailText(appointment) {
+  const appointmentDateTime = moment(
+    `${appointment.date} ${appointment.time}`,
+    "YYYY-MM-DD HH:mm"
+  );
+  const formattedDateTime = appointmentDateTime.format("DD/MM/YYYY [às] HH:mm");
+  let text = `Olá ${appointment.name},\n\n`;
+  text += `Este é um lembrete de que você tem um agendamento em 1 hora.\n`;
+  text += `Agendamento: ${formattedDateTime}.\n\n`;
+  text += "Atenciosamente,\n";
+  text += "Equipe de agendamentos";
+  return text;
+}
+
+async function sendNotificationMail(appointment) {
+  console.log(appointment);
+  const options = {
+    to: appointment.email,
+    subject: "Lembrete de agendamento",
+    text: await buildNotificationEmailText(appointment),
+  };
+
+  return new Promise((resolve, reject) => {
+    nodemailer.sendMail(options, (error, info) => {
+      if (error) return reject(error);
+      return resolve(info);
+    });
+  });
+}
+
+module.exports = { sendConfirmationMail, sendNotificationMail };
