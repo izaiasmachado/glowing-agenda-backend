@@ -22,12 +22,7 @@ async function sendConfirmationMail(appointment) {
     text: buildConfirmationEmailText(appointment),
   };
 
-  return new Promise((resolve, reject) => {
-    nodemailer.sendMail(options, (error, info) => {
-      if (error) return reject(error);
-      return resolve(info);
-    });
-  });
+  return await nodemailer.sendMail(options);
 }
 
 async function buildNotificationEmailText(appointment) {
@@ -52,12 +47,7 @@ async function sendNotificationMail(appointment) {
     text: await buildNotificationEmailText(appointment),
   };
 
-  return new Promise((resolve, reject) => {
-    nodemailer.sendMail(options, (error, info) => {
-      if (error) return reject(error);
-      return resolve(info);
-    });
-  });
+  return await nodemailer.sendMail(options);
 }
 
 module.exports = { sendConfirmationMail, sendNotificationMail };

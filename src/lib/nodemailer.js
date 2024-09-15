@@ -23,9 +23,14 @@ const buildAndValidateMailOptions = (options) => {
   });
 };
 
-function sendMail(options, callback) {
+async function sendMail(options, callback) {
   const mailOptions = buildAndValidateMailOptions(options);
-  return transporter.sendMail(mailOptions, callback);
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) return reject(error);
+      return resolve(info);
+    });
+  });
 }
 
 module.exports = { sendMail };
