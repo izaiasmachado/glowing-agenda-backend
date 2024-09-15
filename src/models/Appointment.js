@@ -1,3 +1,4 @@
+const moment = require("moment-timezone");
 const { Schema, model } = require("../lib/mongoose");
 
 const AppointmentSchema = new Schema({
@@ -21,10 +22,20 @@ const AppointmentSchema = new Schema({
     type: String,
     required: true,
   },
-  confimed: {
-    type: Boolean,
-    default: false,
+  notificationDate: {
+    type: Date,
+    required: false,
   },
+});
+
+AppointmentSchema.pre("save", async function (next) {
+  const appointmentDateTime = `${this.date} ${this.time}`;
+  const notificationDate = moment
+    .tz(appointmentDateTime, "YYYY-MM-DD HH:mm", "America/Sao_Paulo")
+    .subtract(1, "hours");
+
+  this.notificationDate = notificationDate;
+  next();
 });
 
 module.exports = model("Appointment", AppointmentSchema);
