@@ -21,6 +21,10 @@ const AppointmentSchema = new Schema({
     type: String,
     required: true,
   },
+  confimed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = model("Appointment", AppointmentSchema);
