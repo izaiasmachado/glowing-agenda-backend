@@ -1,3 +1,4 @@
+require("./utils/send-email-notification-scheduler");
 const app = require("./app");
 
 app.listen(3000, () => {

@@ -13,7 +13,23 @@ async function searchAppointments(search) {
   });
 }
 
+async function getAppointmentsToNotify() {
+  const now = new Date();
+  const startOfCurrentMinute = new Date(now.setSeconds(0, 0));
+  const endOfCurrentMinute = new Date(
+    startOfCurrentMinute.getTime() + 60 * 1000
+  );
+
+  return await Appointment.find({
+    notificationDate: {
+      $gte: startOfCurrentMinute,
+      $lt: endOfCurrentMinute,
+    },
+  });
+}
+
 module.exports = {
   getAllAppointments,
   searchAppointments,
+  getAppointmentsToNotify,
 };

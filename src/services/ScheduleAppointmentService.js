@@ -1,4 +1,5 @@
 const moment = require("moment");
+const EmailService = require("./EmailService");
 const Appointment = require("../models/Appointment");
 const { getWorkingHours } = require("./WorkingHoursService");
 const { SlotNotAvailableException } = require("../exceptions");
@@ -63,6 +64,7 @@ async function scheduleAppointment(appointment) {
     throw new SlotNotAvailableException();
   }
 
+  await EmailService.sendConfirmationMail(appointment);
   return Appointment.create(appointment);
 }
 
