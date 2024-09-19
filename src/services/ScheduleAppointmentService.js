@@ -87,4 +87,5 @@ async function scheduleAppointment(appointment) {
 module.exports = {
   getAvailableSlots,
   scheduleAppointment,
+  verifySlotAvailable,
 };

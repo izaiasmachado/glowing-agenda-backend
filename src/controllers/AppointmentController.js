@@ -20,4 +20,12 @@ module.exports = {
     const appointments = await AppointmentService.getMonthAppointments(date);
     return res.json(appointments);
   },
+
+  async create(req, res) {
+    const { appointment } = res.locals;
+    const createdAppointment = await AppointmentService.createAppointment(
+      appointment
+    );
+    return res.status(201).json(createdAppointment);
+  },
 };

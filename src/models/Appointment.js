@@ -12,7 +12,7 @@ const AppointmentSchema = new Schema({
   },
   cpf: {
     type: String,
-    required: true,
+    required: false,
   },
   name: {
     type: String,
@@ -20,7 +20,7 @@ const AppointmentSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
   },
   notificationDate: {
     type: Date,

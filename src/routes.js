@@ -22,6 +22,12 @@ router.get(
   AppointmentController.index
 );
 
+router.post(
+  "/appointment",
+  AppointmentMiddleware.validateAppointmentCreation,
+  AppointmentController.create
+);
+
 router.get(
   "/appointments/week",
   AppointmentMiddleware.ensureValidDate,
