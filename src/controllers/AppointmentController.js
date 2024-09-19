@@ -28,4 +28,12 @@ module.exports = {
     );
     return res.status(201).json(createdAppointment);
   },
+
+  async show(req, res) {
+    const { appointmentId } = req.params;
+    const appointment = await AppointmentService.getAppointmentById(
+      appointmentId
+    );
+    return res.json(appointment);
+  },
 };

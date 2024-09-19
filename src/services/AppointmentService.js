@@ -1,6 +1,9 @@
 const moment = require("moment");
 const Appointment = require("../models/Appointment");
-const { SlotNotAvailableException } = require("../exceptions");
+const {
+  SlotNotAvailableException,
+  AppointmentNotFoundException,
+} = require("../exceptions");
 const ScheduleAppointmentService = require("./ScheduleAppointmentService");
 
 async function getAllAppointments() {
@@ -67,6 +70,16 @@ async function createAppointment(appointment) {
   return Appointment.create(appointment);
 }
 
+async function getAppointmentById(appointmentId) {
+  const appointmentExists = await Appointment.findById(appointmentId);
+
+  if (!appointmentExists) {
+    throw new AppointmentNotFoundException();
+  }
+
+  return appointmentExists;
+}
+
 module.exports = {
   getAllAppointments,
   searchAppointments,
@@ -74,4 +87,5 @@ module.exports = {
   getWeekAppointments,
   getMonthAppointments,
   createAppointment,
+  getAppointmentById,
 };

@@ -6,6 +6,13 @@ class SlotNotAvailableException extends ExpressException {
   }
 }
 
+class AppointmentNotFoundException extends ExpressException {
+  constructor() {
+    super("Agendamento não encontrado", 404);
+  }
+}
+
 module.exports = {
   SlotNotAvailableException,
+  AppointmentNotFoundException,
 };

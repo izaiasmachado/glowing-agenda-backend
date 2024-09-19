@@ -22,6 +22,8 @@ router.get(
   AppointmentController.index
 );
 
+router.get("/appointment/:appointmentId", AppointmentController.show);
+
 router.post(
   "/appointment",
   AppointmentMiddleware.validateAppointmentCreation,
