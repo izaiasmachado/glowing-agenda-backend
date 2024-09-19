@@ -31,16 +31,23 @@ async function searchAppointmentByDate(start, end) {
   });
 }
 
+async function getAppointmentsInDay(date) {
+  const dateString = moment(date).format("YYYY-MM-DD");
+  return Appointment.find({
+    date: dateString,
+  });
+}
+
 async function getWeekAppointments(date) {
   const startDay = moment(date).startOf("week");
   const endDay = moment(date).endOf("week").add(1, "week");
-  return searchAppointmentByDate(startDay, endDay);
+  return await searchAppointmentByDate(startDay, endDay);
 }
 
 async function getMonthAppointments(date) {
   const startDay = moment(date).startOf("month");
   const endDay = moment(date).endOf("month").add(1, "month");
-  return searchAppointmentByDate(startDay, endDay);
+  return await searchAppointmentByDate(startDay, endDay);
 }
 
 async function getAppointmentsToNotify() {
@@ -88,4 +95,5 @@ module.exports = {
   getMonthAppointments,
   createAppointment,
   getAppointmentById,
+  getAppointmentsInDay,
 };

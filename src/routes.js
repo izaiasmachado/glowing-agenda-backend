@@ -5,6 +5,7 @@ const AppointmentMiddleware = require("./middlewares/AppointmentMiddleware");
 const ScheduleAppointmentMiddleware = require("./middlewares/ScheduleAppointmentMiddleware");
 const ScheduleAppointmentController = require("./controllers/ScheduleAppointmentController");
 const AppointmentController = require("./controllers/AppointmentController");
+const CalendarController = require("./controllers/CalendarController");
 
 router.get("/", (req, res) => {
   res.json({ message: "Hello World!" });
@@ -40,6 +41,17 @@ router.get(
   "/appointments/month",
   AppointmentMiddleware.ensureValidDate,
   AppointmentController.getMonthAppointments
+);
+
+router.get(
+  "/calendar/week",
+  AppointmentMiddleware.ensureValidDate,
+  CalendarController.week
+);
+router.get(
+  "/calendar/month",
+  AppointmentMiddleware.ensureValidDate,
+  CalendarController.month
 );
 
 module.exports = router;
