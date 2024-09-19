@@ -3,8 +3,10 @@ const router = express.Router();
 
 const AppointmentMiddleware = require("./middlewares/AppointmentMiddleware");
 const ScheduleAppointmentMiddleware = require("./middlewares/ScheduleAppointmentMiddleware");
-const ScheduleAppointmentController = require("./controllers/ScheduleAppointmentController");
+const CalendarMiddleware = require("./middlewares/CalendarMiddleware");
+
 const AppointmentController = require("./controllers/AppointmentController");
+const ScheduleAppointmentController = require("./controllers/ScheduleAppointmentController");
 const CalendarController = require("./controllers/CalendarController");
 
 router.get("/", (req, res) => {
@@ -32,25 +34,14 @@ router.post(
 );
 
 router.get(
-  "/appointments/week",
-  AppointmentMiddleware.ensureValidDate,
-  AppointmentController.getWeekAppointments
-);
-
-router.get(
-  "/appointments/month",
-  AppointmentMiddleware.ensureValidDate,
-  AppointmentController.getMonthAppointments
-);
-
-router.get(
   "/calendar/week",
-  AppointmentMiddleware.ensureValidDate,
+  CalendarMiddleware.ensureValidDate,
   CalendarController.week
 );
+
 router.get(
   "/calendar/month",
-  AppointmentMiddleware.ensureValidDate,
+  CalendarMiddleware.ensureValidDate,
   CalendarController.month
 );
 
