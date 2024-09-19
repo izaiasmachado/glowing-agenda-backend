@@ -12,6 +12,21 @@ async function getAppointmentsInDay(date) {
   });
 }
 
+async function filterPastSlots(date, slots) {
+  const slotsDate = moment(date);
+  const now = moment();
+
+  if (slotsDate.isBefore(now, "day")) {
+    return [];
+  }
+
+  if (slotsDate.isSame(now, "day")) {
+    return slots.filter((slot) => moment(`${date} ${slot}`).isAfter(now));
+  }
+
+  return slots;
+}
+
 async function getFreeSlots(date) {
   const day = moment(date).day();
   const workingHours = await getWorkingHours();
@@ -25,7 +40,9 @@ async function getFreeSlots(date) {
 
   const slots = getTimeSlots(workingHour.from, workingHour.to);
   const appointmentsTime = appointments.map((a) => a.time);
-  return slots.filter((slot) => !appointmentsTime.includes(slot));
+  const freeSlots = slots.filter((slot) => !appointmentsTime.includes(slot));
+  const availableSlots = filterPastSlots(date, freeSlots);
+  return availableSlots;
 }
 
 async function getAvailableSlots() {
