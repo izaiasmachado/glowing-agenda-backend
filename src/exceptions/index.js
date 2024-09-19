@@ -1,7 +1,11 @@
 const ExpressException = require("./ExpressException");
-const { SlotNotAvailableException } = require("./AppointmentExceptions");
+const {
+  SlotNotAvailableException,
+  AppointmentNotFoundException,
+} = require("./AppointmentExceptions");
 
 module.exports = {
   ExpressException,
   SlotNotAvailableException,
+  AppointmentNotFoundException,
 };

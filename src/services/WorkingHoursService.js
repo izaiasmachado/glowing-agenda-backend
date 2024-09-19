@@ -1,5 +1,3 @@
-const moment = require("moment");
-
 const workingHours = [
   {
     day: 1,
@@ -37,6 +35,11 @@ async function getWorkingHours() {
   return workingHours;
 }
 
+async function getWorkingHoursInDay(day) {
+  return workingHours.find((wh) => wh.day === day);
+}
+
 module.exports = {
   getWorkingHours,
+  getWorkingHoursInDay,
 };
