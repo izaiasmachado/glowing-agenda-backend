@@ -22,4 +22,16 @@ router.get(
   AppointmentController.index
 );
 
+router.get(
+  "/appointments/week",
+  AppointmentMiddleware.ensureValidDate,
+  AppointmentController.getWeekAppointments
+);
+
+router.get(
+  "/appointments/month",
+  AppointmentMiddleware.ensureValidDate,
+  AppointmentController.getMonthAppointments
+);
+
 module.exports = router;
