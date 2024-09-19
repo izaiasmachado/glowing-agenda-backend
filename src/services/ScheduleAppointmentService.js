@@ -29,9 +29,8 @@ async function getFreeSlots(date) {
 }
 
 async function getAvailableSlots() {
-  const numberOfDays = 7;
-  const startDay = moment();
-  const endDay = moment().add(numberOfDays, "days");
+  const startDay = moment().startOf("week");
+  const endDay = moment().endOf("week").add(1, "week");
   const days = await getDaysArray(startDay, endDay);
 
   const availableDaysSlotsPromise = days.map(async (day) => {
