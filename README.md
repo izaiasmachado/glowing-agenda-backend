@@ -1,4 +1,4 @@
-<h1 align="center"><img width="300px" src="docs/img/icon.png"></h1>
+<h1 align="center"><img width="500px" src="docs/img/icon.png"></h1>
 
 <p align="center">
   <strong>O seu sistema de agendamentos!</strong>
