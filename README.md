@@ -31,7 +31,7 @@ Antes de começar, certifique-se de ter os seguintes componentes instalados em s
 4. Caso deseje usar Docker para rodar o banco execute `docker compose up -d`
 5. Instale as dependências do projeto `npm install`
 6. Execute o comando para rodar a aplicação localmente `npm run dev`
-7. Acesse a aplicação em `http://localhost:5000`
+7. Acesse a aplicação em `http://localhost:3333`
 
 **Obs:** Caso deseje hospedar um banco próprio, altere o arquivo `.env` com as credenciais desse banco.
 
