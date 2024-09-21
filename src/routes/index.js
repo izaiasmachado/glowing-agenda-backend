@@ -15,9 +15,11 @@ router.get("/", () => {
   res.json({ message: "Hello World!" });
 });
 
+const authRouter = require("./auth");
 const calendarRouter = require("./calendar");
 const appointmentRouter = require("./appointment");
 
+router.use("/auth", authRouter);
 router.use("/appointment", appointmentRouter);
 router.use("/calendar", calendarRouter);
 
