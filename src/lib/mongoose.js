@@ -8,7 +8,7 @@ mongoose
   .connect(AGENDAMENTOS_MONGODB_URI, {
     dbName: AGENDAMENTOS_MONGODB_DB_NAME,
   })
-  .then(() => console.log("Connected!!"))
+  .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to mongo", err));
 
 module.exports = mongoose;
