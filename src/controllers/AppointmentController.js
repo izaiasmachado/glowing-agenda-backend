@@ -36,4 +36,10 @@ module.exports = {
     );
     return res.json(appointment);
   },
+
+  async delete(req, res) {
+    const { appointmentId } = req.params;
+    await AppointmentService.deleteAppointment(appointmentId);
+    return res.status(204).send();
+  },
 };

@@ -26,6 +26,7 @@ router.get(
 );
 
 router.get("/appointment/:appointmentId", AppointmentController.show);
+router.delete("/appointment/:appointmentId", AppointmentController.delete);
 
 router.post(
   "/appointment",
