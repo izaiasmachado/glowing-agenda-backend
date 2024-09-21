@@ -6,10 +6,28 @@ const userCreationSchema = zod.object({
   name: zod.string().min(2).max(255),
 });
 
+const userLoginSchema = zod.object({
+  email: zod.string().email(),
+  password: zod.string().min(6),
+});
+
 module.exports = {
   async validateUserCreation(req, res, next) {
     const rawData = req.body;
     const { success, error, data } = userCreationSchema.safeParse(rawData);
+
+    if (success) {
+      res.locals.user = data;
+      return next();
+    }
+
+    const formatted = error.format();
+    return res.status(400).json({ error: formatted });
+  },
+
+  async validateUserLogin(req, res, next) {
+    const rawData = req.body;
+    const { success, error, data } = userLoginSchema.safeParse(rawData);
 
     if (success) {
       res.locals.user = data;

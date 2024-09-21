@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const environment = require("./environment");
-const secret = environment.GUIAPERGUNTAS_JWT_SECRET;
+const secret = environment.AGENDAMENTOS_JWT_SECRET;
 
 const sign = async (payload) => {
   return new Promise((resolve, reject) => {

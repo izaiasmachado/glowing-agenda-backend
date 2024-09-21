@@ -1,8 +1,32 @@
 const bcrypt = require("../lib/bcrypt");
 const User = require("../models/User");
-const { EmailAlreadyExistsException } = require("../exceptions/UserExceptions");
+const {
+  EmailAlreadyExistsException,
+  UserNotFoundException,
+  EmailOrPasswordIncorrectException,
+} = require("../exceptions/UserExceptions");
 
 module.exports = {
+  async findUserByEmailAndPassword(user) {
+    const { email, password } = user;
+    const foundUser = await User.findOne({ email });
+
+    if (!foundUser) {
+      throw new EmailOrPasswordIncorrectException();
+    }
+
+    const isPasswordValid = await bcrypt.comparePassword(
+      password,
+      foundUser.password
+    );
+
+    if (!isPasswordValid) {
+      throw new EmailOrPasswordIncorrectException();
+    }
+
+    return this._serialize(foundUser);
+  },
+
   async create(userData) {
     const userExists = await User.findOne({ email: userData.email });
 
