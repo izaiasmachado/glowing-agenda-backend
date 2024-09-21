@@ -1,13 +1,12 @@
 {
-  "name": "backend",
+  "name": "glowing-agenda-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "start-db": "docker-compose up -d",
     "start": "node src/server",
-    "dev": "node --watch src/server",
-    "start:migrate:prod": "npx prisma db push && npm start"
+    "dev": "node --watch src/server"
   },
   "keywords": [],
   "author": "",
