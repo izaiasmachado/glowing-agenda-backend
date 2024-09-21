@@ -87,6 +87,10 @@ async function getAppointmentById(appointmentId) {
   return appointmentExists;
 }
 
+async function deleteAppointment(appointmentId) {
+  await Appointment.findByIdAndDelete(appointmentId);
+}
+
 module.exports = {
   getAllAppointments,
   searchAppointments,
@@ -96,4 +100,5 @@ module.exports = {
   createAppointment,
   getAppointmentById,
   getAppointmentsInDay,
+  deleteAppointment,
 };
