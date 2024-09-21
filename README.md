@@ -27,10 +27,11 @@ Antes de começar, certifique-se de ter os seguintes componentes instalados em s
 
 1. Clone o projeto na sua máquina local `git clone https://github.com/izaiasmachado/glowing-agenda-backend.git`
 2. Modifique o nome do arquivo `.env.example` para `.env`
-3. Caso deseje usar Docker para rodar o banco execute `docker compose up -d`
-4. Instale as dependências do projeto `npm install`
-5. Execute o comando para rodar a aplicação localmente `npm run dev`
-6. Acesse a aplicação em `http://localhost:3000`
+3. No seu `.env`, adicione seu e-mail do Gmail e uma senha de aplicativo [criada neste link](https://myaccount.google.com/apppasswords)
+4. Caso deseje usar Docker para rodar o banco execute `docker compose up -d`
+5. Instale as dependências do projeto `npm install`
+6. Execute o comando para rodar a aplicação localmente `npm run dev`
+7. Acesse a aplicação em `http://localhost:5000`
 
 **Obs:** Caso deseje hospedar um banco próprio, altere o arquivo `.env` com as credenciais desse banco.
 
