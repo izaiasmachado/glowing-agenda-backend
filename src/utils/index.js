@@ -1,4 +1,9 @@
 const moment = require("moment");
+const { AGENDAMENTOS_JWT_SECRET } = require("../lib/environment");
+
+const cookiesSecurity =
+  AGENDAMENTOS_JWT_SECRET === "production" ? "Secure; " : "";
+const COOKIE_OPTIONS = `HttpOnly; SameSite=Strict; Path=/; ${cookiesSecurity}`;
 
 function getTimeSlots(start, end) {
   const duration = 30;
@@ -35,7 +40,12 @@ async function getDaysArray(startDate, endDate) {
   return dates;
 }
 
+function setJwtCookie(res, jwt) {
+  res.header("Set-Cookie", `authorization=${jwt}; ${COOKIE_OPTIONS}`);
+}
+
 module.exports = {
   getTimeSlots,
   getDaysArray,
+  setJwtCookie,
 };
