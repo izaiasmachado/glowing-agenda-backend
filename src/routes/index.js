@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const AuthMiddleware = require("../middlewares/AuthMiddleware");
 const ScheduleAppointmentController = require("../controllers/ScheduleAppointmentController");
 const ScheduleAppointmentMiddleware = require("../middlewares/ScheduleAppointmentMiddleware");
 
@@ -20,7 +21,15 @@ const calendarRouter = require("./calendar");
 const appointmentRouter = require("./appointment");
 
 router.use("/auth", authRouter);
-router.use("/appointment", appointmentRouter);
-router.use("/calendar", calendarRouter);
+router.use(
+  "/appointment",
+  AuthMiddleware.ensureUserIsAuthenticated,
+  appointmentRouter
+);
+router.use(
+  "/calendar",
+  AuthMiddleware.ensureUserIsAuthenticated,
+  calendarRouter
+);
 
 module.exports = router;

@@ -7,6 +7,16 @@ const {
 } = require("../exceptions/UserExceptions");
 
 module.exports = {
+  async findUserById(id) {
+    const found = await User.findById(id);
+
+    if (!found) {
+      return null;
+    }
+
+    return this._serialize(found);
+  },
+
   async findUserByEmailAndPassword(user) {
     const { email, password } = user;
     const foundUser = await User.findOne({ email });

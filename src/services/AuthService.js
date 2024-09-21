@@ -7,7 +7,11 @@ module.exports = {
   },
 
   async decodeUserToken(token) {
-    const decoded = await jwt.verify(token);
-    return decoded;
+    try {
+      const decoded = await jwt.verify(token);
+      return decoded;
+    } catch (error) {
+      return null;
+    }
   },
 };
