@@ -11,7 +11,7 @@ function buildConfirmationEmailText(appointment) {
   let text = `Olá ${appointment.name},\n\n`;
   text += `Seu agendamento foi confirmado para o dia ${formattedDateTime}.\n\n`;
   text += "Atenciosamente,\n";
-  text += "Equipe de agendamentos";
+  text += "Equipe Glowing Agenda";
   return text;
 }
 
@@ -35,7 +35,7 @@ async function buildNotificationEmailText(appointment) {
   text += `Este é um lembrete de que você tem um agendamento em 1 hora.\n`;
   text += `Agendamento: ${formattedDateTime}.\n\n`;
   text += "Atenciosamente,\n";
-  text += "Equipe de agendamentos";
+  text += "Equipe de Glowing Agenda";
   return text;
 }
 
